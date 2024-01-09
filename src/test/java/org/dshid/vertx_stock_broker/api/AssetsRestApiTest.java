@@ -16,9 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @ExtendWith(VertxExtension.class)
-public class AssetRestApiTest {
+public class AssetsRestApiTest {
 
-  private static final Logger LOG = LoggerFactory.getLogger(AssetRestApiTest.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AssetsRestApiTest.class);
 
   @BeforeEach
   void deploy_verticle(Vertx vertx, VertxTestContext testContext) {
