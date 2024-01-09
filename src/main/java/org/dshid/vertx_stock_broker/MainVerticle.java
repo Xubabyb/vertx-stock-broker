@@ -5,6 +5,7 @@ import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import org.dshid.vertx_stock_broker.api.AssetsRestApi;
+import org.dshid.vertx_stock_broker.api.QuotesRestApi;
 import org.dshid.vertx_stock_broker.error.ErrorHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,7 @@ public class MainVerticle extends AbstractVerticle {
 
     // Добавляем апи
     AssetsRestApi.attach(router);
+    QuotesRestApi.attach(router);
 
     // Создаем Http-сервер
     vertx.createHttpServer()
