@@ -1,4 +1,4 @@
-package org.dshid.vertx_stock_broker;
+package org.dshid.vertx_stock_broker.api;
 
 import static org.dshid.vertx_stock_broker.MainVerticle.PORT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,6 +8,7 @@ import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.client.WebClientOptions;
 import io.vertx.junit5.VertxExtension;
 import io.vertx.junit5.VertxTestContext;
+import org.dshid.vertx_stock_broker.MainVerticle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,9 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @ExtendWith(VertxExtension.class)
-public class TestMainVerticle {
+public class AssetRestApiTest {
 
-  private static final Logger LOG = LoggerFactory.getLogger(TestMainVerticle.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AssetRestApiTest.class);
 
   @BeforeEach
   void deploy_verticle(Vertx vertx, VertxTestContext testContext) {
@@ -33,7 +34,7 @@ public class TestMainVerticle {
       .onComplete(testContext.succeeding(response -> {
         var json = response.bodyAsJsonArray();
         LOG.info("Response {}", json);
-        assertEquals("[{\"name\":\"point A\"},{\"name\":\"point B\"},{\"name\":\"point C\"}]", json.encode());
+        assertEquals("[{\"name\":\"AMZN\"},{\"name\":\"NFLX\"},{\"name\":\"TSLA\"}]", json.encode());
         assertEquals(200, response.statusCode());
         testContext.completeNow();
       }));

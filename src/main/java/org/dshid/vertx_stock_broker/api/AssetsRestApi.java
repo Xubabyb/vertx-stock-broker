@@ -15,9 +15,9 @@ public class AssetsRestApi {
       .handler(context -> {
         final var response = new JsonArray();
         response
-          .add(new Asset("point A"))
-          .add(new Asset("point B"))
-          .add(new Asset("point C"));
+          .add(new Asset("AMZN"))
+          .add(new Asset("NFLX"))
+          .add(new Asset("TSLA"));
         LOG.info("Path {} responds with {}", context.normalizedPath(), response.encode());
         context.response().end(response.toBuffer());
       });
