@@ -34,7 +34,7 @@ public class AssetRestApiTest {
       .onComplete(testContext.succeeding(response -> {
         var json = response.bodyAsJsonArray();
         LOG.info("Response {}", json);
-        assertEquals("[{\"name\":\"AMZN\"},{\"name\":\"NFLX\"},{\"name\":\"TSLA\"}]", json.encode());
+        assertEquals("[{\"name\":\"AMZN\"},{\"name\":\"NFLX\"},{\"name\":\"TSLA\"},{\"name\":\"GOOG\"},{\"name\":\"MSFT\"},{\"name\":\"AAPL\"}]", json.encode());
         assertEquals(200, response.statusCode());
         testContext.completeNow();
       }));

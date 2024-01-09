@@ -3,6 +3,8 @@ package org.dshid.vertx_stock_broker.api;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 import org.dshid.vertx_stock_broker.dto.Asset;
 import org.dshid.vertx_stock_broker.dto.Quote;
@@ -14,13 +16,16 @@ public class QuotesRestApi {
   private static final Logger LOG = LoggerFactory.getLogger(QuotesRestApi.class);
 
   public static void attach(Router parent) {
+    final Map<String, Quote> cashedQuotes = new HashMap<>();
+    AssetsRestApi.ASSETS.forEach(symbol -> cashedQuotes.put(symbol, initRandomQuote(symbol)));
+
     parent.get("/quotes/:asset").handler(context -> {
 
       //Переменная пути
       final var assetParam = context.pathParam("asset");
       LOG.debug("Asset parameter: {}", assetParam);
 
-      var quote = initRandomQuote(assetParam);
+      var quote = cashedQuotes.get(assetParam);
       final JsonObject response = quote.toJsonObject();
       LOG.info("Path {} responds with {}", context.normalizedPath(), response.encode());
       context.response().end(response.toBuffer());
